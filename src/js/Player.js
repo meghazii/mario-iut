@@ -16,6 +16,26 @@ function Player(x, y){
     this.jumping = false;
 }
 
+Player.prototype.moveUp = function(){
+    this.y = this.y - 1.66;
+    if(this.direction == 1){
+	this.frameD = 2;
+    }
+    else if(this.direction == 0){
+	this.frameG = 3;
+    }    
+}
+
+Player.prototype.moveDown = function(){
+    this.y = this.y + 1.66;
+    if(this.direction == 1){
+	this.frameD = 2;
+    }
+    else if(this.direction == 0){
+	this.frameG = 3;
+    }    
+}
+
 Player.prototype.moveRight = function(){
     this.direction = 1;
     this.x = this.x + 10;
@@ -41,6 +61,11 @@ Player.prototype.display = function(context, moving){
     }
     else if(this.direction == 0 && moving == 0){
 	context.drawImage(this.image, 420-widthS, 0, widthS, heightS, this.x, this.y,widthS,heightS);
+    }else if(this.direction == 1 && moving == 3){
+	context.drawImage(this.image,(widthS*this.frameD)%420,heightS,widthS,heightS,this.x,this.y,widthS,heightS);
+    }
+    else if(this.direction == 0 && moving == 3){
+	context.drawImage(this.image,(widthS*this.frameG)%420,0,widthS,heightS,this.x,this.y,widthS,heightS);
     }
 }
 

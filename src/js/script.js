@@ -1,7 +1,7 @@
 window.onload = function() {
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
-    var joueur = new Player(0, 0);
+    var joueur = new Player(0, 505);
     joueur.display(ctx);
 
     window.onkeydown = function(event){
@@ -18,6 +18,13 @@ window.onload = function() {
 	    joueur.display(ctx, 1);
 	}
 	else if(key == 38){
+	    for(i = 0; i < 60; i++){
+		setTimeout(function(){
+		    ctx.clearRect(joueur.x, joueur.y, joueur.x + 60, joueur.y +95);
+		    joueur.moveUp();
+		    joueur.display(ctx, 3);
+		}, 32)
+	    }
 	}
 	return true;
     }

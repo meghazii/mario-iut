@@ -1,12 +1,15 @@
+var ts = new Tileset("tiles.png");
+
+
+
 window.onload = function() {
 	var canvas = document.getElementById('canvas');
 	var ctx = canvas.getContext('2d');
 	
-	ctx.fillStyle = 'blue';
-	ctx.fillRect(10, 10, 100, 50);
-	
-	ctx.strokeStyle = 'red';
-	ctx.strokeRect(75, 75, 50, 50);
+ts.dessinerTile(1, ctx, 10, 10);
+ts.dessinerTile(5, ctx, 50, 10);
+ts.dessinerTile(6, ctx, 90, 10);
+ts.dessinerTile(7, ctx, 130, 10);
 
 
 }

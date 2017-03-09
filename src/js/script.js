@@ -1,40 +1,35 @@
+const timer = 16;
+
 window.onload = function() {
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
     var joueur = new Player(0, 505);
-    joueur.display(ctx);
+
+    var interval = setInterval(
+	function(){
+	    console.log(joueur.x +","+ joueur.y);
+	    console.log("PREC" + joueur.xPrec + "," + joueur.yPrec);
+	    ctx.clearRect(joueur.xPrec, joueur.yPrec, joueur.xPrec + 60, joueur.yPrec +95);
+	    joueur.display(ctx);
+	}, timer);
 
     window.onkeydown = function(event){
 	var e = event || window.event;
 	var key = e.keyCode;
 	if(key == 39){
-	    ctx.clearRect(joueur.x, joueur.y, joueur.x + 60, joueur.y +95);
-	    joueur.moveRight();
-	    joueur.display(ctx, 1);
+	    joueur.moveRight();;
 	}
-	else if(key == 37){
-	    ctx.clearRect(joueur.x, joueur.y, joueur.x + 60, joueur.y +95);
+	if(key == 37){
 	    joueur.moveLeft();
-	    joueur.display(ctx, 1);
 	}
-	else if(key == 38){
-	    for(i = 0; i < 60; i++){
-		setTimeout(function(){
-		    ctx.clearRect(joueur.x, joueur.y, joueur.x + 60, joueur.y +95);
-		    joueur.moveUp();
-		    joueur.display(ctx, 3);
-		}, 32)
-	    }
+	if(key == 38){
+	    joueur.moveUp();
 	}
 	return true;
     }
 
-    window.onkeyup = function(event){
+    /*window.onkeyup = function(event){
 	var e = event || window.event;
-	ctx.clearRect(joueur.x, joueur.y, joueur.x + 60, joueur.y +95);
-	joueur.display(ctx, 0);
-    }
-
+	joueur.immo(ctx);
+    }*/
 }
-
-

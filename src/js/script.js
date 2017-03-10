@@ -5,12 +5,35 @@ window.onload = function() {
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
     var joueur = new Player(0, 505-32, 60, 95, 2);
+<<<<<<< HEAD
+=======
+   /* var map = [];
+    for(i = 0; i < 100; i++){
+	map[i] = new Entity(i*32, 600-32, 32, 32, "./data/img/terre.png");
+    }
+    var terre = new Entity(200, 568, 32, 32, "./data/img/escalier.png", 1);*/
+    var map = new Map();
+>>>>>>> bcabd5906023d08f69ab87a92f86eaf0e0a5421f
     var interval = setInterval(
 	function(){
 	    ctx.clearRect(joueur.posPrec.x, joueur.posPrec.y, joueur.posPrec.x + 60, joueur.posPrec.y +95);
 	    joueur.update();
+<<<<<<< HEAD
 	    //joueur.collide(map);
 	    joueur.display(ctx);
+=======
+	    /*(i = 0; i < 100; i++){
+		joueur.collide(map[i]);
+		map[i].display(ctx);
+	    }*/
+	    for(i =0; i < 120; i ++){
+			for(j = 0; j < 20; j++){
+				joueur.collide(map.tiles[i][j]);
+				map.tiles[i][j].display(ctx);
+			}
+		}
+		joueur.display(ctx);
+>>>>>>> bcabd5906023d08f69ab87a92f86eaf0e0a5421f
 	    if(deltaT != 0) deltaT--;
 	    if(deltaT <= 0){
 		joueur.accel.mult(0);

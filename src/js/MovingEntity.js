@@ -44,9 +44,9 @@ class MovingEntity extends Entity{
 	    this.vitesse.x = 0;
 	    this.position.x = 0;
 	}
-	if (this.position.y > heightMap) {
-	    alert("GAME OVER");
- 	}
+	if (this.position.y > heightMap - 95) {
+		this.position.y = 640-95;
+	}
 	else if (this.position.y <= 0) {
 	    this.vitesse.y = 0;
 	    this.position.y = 0;
@@ -56,6 +56,7 @@ class MovingEntity extends Entity{
 	    this.vitesse.x = 0;
 	    this.position.x = this.posPrec.x; 
 	}
+
     }
 }
     

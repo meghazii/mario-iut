@@ -4,15 +4,14 @@ var deltaT = 0;
 window.onload = function() {
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
-    var joueur = new Player(0, 505);
+    var joueur = new Player(0, 505, 60, 95, 2);
+	var champ = new Enemy(200, 568, 32, 32, "./data/img/escalier.png", 1);
     var interval = setInterval(
 	function(){
-	    console.log("POSITION : " +joueur.position.x +","+ joueur.position.y);
-	    console.log("POSPREC : " + joueur.posPrec.x + "," + joueur.posPrec.y);
-	    //console.log("POSPREC : " +joueur.accel.x +","+ joueur.accel.y);
 	    ctx.clearRect(joueur.posPrec.x, joueur.posPrec.y, joueur.posPrec.x + 60, joueur.posPrec.y +95);
-	    joueur.update();
-	    joueur.collide();
+	    joueur.collide(champ);
+		joueur.update();
+		champ.display(ctx);
 	    joueur.display(ctx);
 	    if(deltaT != 0) deltaT--;
 	    if(deltaT <= 0){

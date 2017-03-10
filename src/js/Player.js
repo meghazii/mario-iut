@@ -1,71 +1,46 @@
-const heightS = 95;
-const widthS = 60;
-
-function Player(x, y){
-    //image du joueur
-    this.image = new Image();
-    this.image.src = "./data/img/mario.png";
-    //initialisation des frames de debut pour chacun des déplacements (droite et gauche)
-    this.frameD = 0;
-    this.frameG = 6;
-    //coordonnées du joueur
-    this.x = x;
-    this.y = y;
-    // 0 = gauche et 1 = droite
-    this.direction = 1;
-    this.jumping = false;
-}
-
-Player.prototype.moveUp = function(){
-    this.y = this.y - 1.66;
-    if(this.direction == 1){
-	this.frameD = 2;
+class Player extends MovingEntity{
+    
+    constructor(x, y, w, h, mass){
+	super(x, y, w, h, "./data/img/mario.png", mass);
+	this.jumping = false;
     }
-    else if(this.direction == 0){
-	this.frameG = 3;
-    }    
-}
+    
+    moveUp(){
+	this.accel.y -= 40;
+    }
 
-Player.prototype.moveDown = function(){
-    this.y = this.y + 1.66;
-    if(this.direction == 1){
-	this.frameD = 2;
+    moveRight(){
+	this.moving = true;
+	this.accel.x += 10;
+	this.frameD++;
+	this.direction = 1;
     }
-    else if(this.direction == 0){
-	this.frameG = 3;
-    }    
-}
 
-Player.prototype.moveRight = function(){
-    this.direction = 1;
-    this.x = this.x + 10;
-    this.frameD++;
-}
-
-Player.prototype.moveLeft = function(){
-    this.direction = 0;
-    this.x = this.x - 10;
-    this.frameG--;
-}
-
-Player.prototype.display = function(context, moving){
-    //moving : 0 pour fin de déplacement, 1 pour déplacement, 2 pour saut
-    if(this.direction == 1 && moving == 1){
-	context.drawImage(this.image,(widthS*this.frameD)%420,heightS,widthS,heightS,this.x,this.y,widthS,heightS);
+    moveLeft(){
+	this.moving = true;
+	this.direction = 0;
+	this.accel.x -= 10;
+	this.frameG--;
     }
-    else if(this.direction == 0 && moving == 1){
-	context.drawImage(this.image, (420-this.frameG*widthS)%420, 0, widthS, heightS, this.x, this.y,widthS,heightS);
-    }
-    else if(this.direction == 1 && moving == 0){
-	context.drawImage(this.image, 0, heightS, widthS, heightS, this.x, this.y,widthS,heightS);
-    }
-    else if(this.direction == 0 && moving == 0){
-	context.drawImage(this.image, 420-widthS, 0, widthS, heightS, this.x, this.y,widthS,heightS);
-    }else if(this.direction == 1 && moving == 3){
-	context.drawImage(this.image,(widthS*this.frameD)%420,heightS,widthS,heightS,this.x,this.y,widthS,heightS);
-    }
-    else if(this.direction == 0 && moving == 3){
-	context.drawImage(this.image,(widthS*this.frameG)%420,0,widthS,heightS,this.x,this.y,widthS,heightS);
+    
+    display(context){
+	if(this.direction == 0 && this.jumping){
+	    context.drawImage(this.image, (420 - 3*this.width), 0, this.width, this.height, this.position.x, this.position.y,this.width,this.height);
+	}
+	else if(this.direction == 1 && this.jumping){
+	    context.drawImage(this.image, 3*this.width, this.height, this.width, this.height, this.position.x, this.position.y,this.width,this.height);
+	}
+	else if(this.direction == 1 && this.moving){
+	    context.drawImage(this.image,(this.width*this.frameD)%420,this.height,this.width,this.height,this.position.x,this.position.y,this.width,this.height);
+	}
+	else if(this.direction == 0 && this.moving){
+	    context.drawImage(this.image, (420-this.frameG*this.width)%420, 0, this.width, this.height, this.position.x, this.position.y,this.width,this.height);
+	}
+	else if(this.direction == 1 && ! this.moving){
+	    context.drawImage(this.image, 0 , this.height, this.width, this.height, this.position.x, this.position.y,this.width,this.height);
+	}
+	else if(this.direction == 0 && ! this.moving){
+	    context.drawImage(this.image, 420 - this.width, 0, this.width, this.height, this.position.x, this.position.y,this.width,this.height);
+	}	
     }
 }
-

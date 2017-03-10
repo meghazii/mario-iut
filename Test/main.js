@@ -1,8 +1,7 @@
-var ts = new Tileset("tiles.png");
-
 
 
 window.onload = function() {
+	var ts = new Tileset("tiles.png");
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
     
@@ -10,6 +9,4 @@ window.onload = function() {
     ts.dessinerTile(5, ctx, 50, 10);
     ts.dessinerTile(6, ctx, 90, 10);
     ts.dessinerTile(7, ctx, 130, 10);
-
-
 }

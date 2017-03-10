@@ -4,7 +4,7 @@ const heightMap = 600;
 class MovingEntity extends Entity{
 
     constructor(x, y, w, h, url, mass){
-	super(x, y, w, h, url);
+	super(x, y, w, h, url, true);
 	this.mass = mass;
 	
 	//initialisation des frames de debut pour chacun des déplacements (droite et gauche)
@@ -35,7 +35,7 @@ class MovingEntity extends Entity{
 	this.vitesse.mult(0);
     }
 
-    collide(entity){
+    collide(map){
 	//Check les collisions avec les bords
 	if (this.position.x > widthMap - this.width) {
 	    this.position.x = widthMap - this.width;
@@ -46,19 +46,16 @@ class MovingEntity extends Entity{
 	}
 	if (this.position.y > heightMap) {
 	    alert("GAME OVER");
-	}
+ 	}
 	else if (this.position.y <= 0) {
 	    this.vitesse.y = 0;
 	    this.position.y = 0;
 	}
 	//Teste les collisions avec les objets de la map
-	if((this.position.x <= (entity.position.x + entity.width)) && ((this.position.x + this.width) >= entity.position.x)){
+	if(map.tiles[(this.x*32) + 60].collide){
 	    this.vitesse.x = 0;
-	    //this.position.x = this.posPrec.x;
-	}
-	if((this.position.y <= (entity.position.y + entity.height)) && ((this.position.y + this.height) >= entity.position.y)){
-	    this.vitesse.y = 0;
-	    this.position.y = this.posPrec.y;
+	    this.position.x = this.posPrec.x; 
 	}
     }
 }
+    

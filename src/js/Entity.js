@@ -1,5 +1,5 @@
 class Entity{
-    constructor(x, y, w, h, url){
+    constructor(x, y, w, h, url, collide){
 	//image de l'entité
 	this.image = new Image();
 	this.image.src = url;
@@ -12,6 +12,8 @@ class Entity{
 	this.position = new Vecteur(x, y);
 	this.vitesse = new Vecteur(0, 0);
 	this.accel = new Vecteur(0, 0);
+
+	this.collide = collide;
     }
 
     display(context){

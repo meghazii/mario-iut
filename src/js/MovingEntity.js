@@ -35,7 +35,7 @@ class MovingEntity extends Entity{
 	this.vitesse.mult(0);
     }
 
-    collide(map){
+    collideA(map){
 	//Check les collisions avec les bords
 	if (this.position.x > widthMap - this.width) {
 	    this.position.x = widthMap - this.width;

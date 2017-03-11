@@ -2,7 +2,7 @@ class Map{
 
     constructor(){
 
-	this.widthMapA = 800;
+	this.widthMapA = 500;
 	this.heightMapA = 20;
 	
 	this.tiles = new Array(500);

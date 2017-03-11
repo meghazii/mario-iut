@@ -99,9 +99,11 @@ class Player{
 	}
     }
 
-    testKill(ennemi){
-	if((map.tiles[Math.trunc((this.position.x)/32) + b][Math.trunc((this.position.y + 50)/32)].collide) ||
-	   (map.tiles[Math.trunc((this.position.x+32)/32) + b][Math.trunc((this.position.y+50)/32)].collide)){
+    testKill(enemy){
+	for(var i = 0; i < enemy.listeEn.length; i++){
+	    if((Math.trunc(this.position.x/32)) == Math.trunc(enemy.listeEn[i].position.x/32)){
+		enemy.listeEn[i].dead = true;
+	    }
 	}
     }
     

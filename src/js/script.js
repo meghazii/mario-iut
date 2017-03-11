@@ -2,6 +2,7 @@ const timer = 16;
 var b = 0;
 var c = 25;
 var dT = 0;
+const widthMapCase = 120;
 
 window.onload = function() {
     var canvas = document.getElementById('canvas');
@@ -16,7 +17,7 @@ window.onload = function() {
 	    ctx.clearRect(0, 0, 800,640);
 	    joueur.update();
 	    joueur.collision(map, b);
-	    if((joueur.position.x >= 300) && (c < 115)){
+	    if((joueur.position.x >= 300) && (c < widthMapCase - 5)){
 		joueur.position.x = joueur.posPrec.x;
 		b++;
 		c++;
@@ -28,11 +29,11 @@ window.onload = function() {
 	    }
 	    if(b < 0){
 		b = 0;
-		c = 25;
+		c = widthMapCase+25;
 	    }
-	    if(c > 120){
-		c = 120;
-		b = 95;
+	    if(c > widthMapCase){
+		c = widthMapCase;
+		b = widthMapCase - 25;
 	    }
 	    for(i = b; i < c; i++){
 		for(j = 0; j < 20; j++){
@@ -40,6 +41,7 @@ window.onload = function() {
 		}
 	    }
 	    ennemi.update(map, b);
+	    joueur.testKill(ennemi);
 	    ennemi.display(ctx, b, c);
 	    joueur.display(ctx);
 	    dT++;

@@ -1,7 +1,7 @@
 class Goomba extends MovingEntity{
 
-    constructor(x){
-	super(x*32, 640-64, 32, 32, "./data/img/goomba.png", 3);
+    constructor(x, delta, direction){
+	super(x*32, 640-64, 32, 32, "./data/img/goomba.png", 3, delta, direction);
 	this.x = x;
 	this.frame = 0;
 	this.widthS = 32;

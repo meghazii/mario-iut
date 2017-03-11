@@ -1,16 +1,29 @@
-class Player extends MovingEntity{
+class Player{
     
-    constructor(x, y, w, h, mass){
-	super(x, y, w, h, "./data/img/mario.png", mass);
+    constructor(x, y, w, h, mass, direction){
+
+	this.image = new Image();
+	this.image.src = "./data/img/mario.png";
+	this.mass = mass;
+	
+	this.posPrec = new Vecteur(x, y);
+	this.gravity = new Vecteur(0, 0.9*this.mass);
+
+	this.position = new Vecteur(x, y);
+	this.vitesse = new Vecteur(0, 0);
+	this.accel = new Vecteur(0, 0);
 
 	this.widthS = 60;
 	this.heightS = 95;
+	this.width = w;
+	this.height = h;
 
 	this.frameD = 0;
 	this.frameG = 6;
 
+	this.direction = direction;
 	this.jumping = false;
-	//this.boxCase = Math.trunc(this.position.x/32);
+	this.moving = false;
     }
     
     moveUp(){
@@ -22,15 +35,21 @@ class Player extends MovingEntity{
 	if(this.jumping) this.accel.x += 3;
 	else this.accel.x += 10;
 	this.frameD++;
-	this.direction = 1;
+	this.direction = true;
     }
 
     moveLeft(){
 	this.moving = true;
-	this.direction = 0;
+	this.direction = false;
 	if(this.jumping) this.accel.x -= 3;
 	else this.accel.x -= 10;
 	this.frameG--;
+    }
+
+    physic(force){
+	//applique la gravité
+	var f = Vecteur.div(force, this.mass);
+	this.accel.add(f);
     }
     
     update(){
@@ -81,22 +100,22 @@ class Player extends MovingEntity{
     }
     
     display(context){
-	if(this.direction == 0 && this.jumping){
+	if(! this.direction && this.jumping){
 	    context.drawImage(this.image, (420 - 3*this.widthS), 0, this.widthS, this.heightS, this.position.x, this.position.y,this.width,this.height);
 	}
-	else if(this.direction == 1 && this.jumping){
+	else if(this.direction && this.jumping){
 	    context.drawImage(this.image, 3*this.widthS, this.heightS, this.widthS, this.heightS, this.position.x, this.position.y,this.width,this.height);
 	}
-	else if(this.direction == 1 && this.moving){
+	else if(this.direction && this.moving){
 	    context.drawImage(this.image,(this.widthS*this.frameD)%420,this.heightS,this.widthS,this.heightS,this.position.x,this.position.y,this.width,this.height);
 	}
-	else if(this.direction == 0 && this.moving){
+	else if( ! this.direction && this.moving){
 	    context.drawImage(this.image, (420-this.frameG*this.widthS)%420, 0, this.widthS, this.heightS, this.position.x, this.position.y,this.width,this.height);
 	}
-	else if(this.direction == 1 && ! this.moving){
+	else if(this.direction && ! this.moving){
 	    context.drawImage(this.image, 0 , this.heightS, this.widthS, this.heightS, this.position.x, this.position.y,this.width,this.height);
 	}
-	else if(this.direction == 0 && ! this.moving){
+	else if( ! this.direction && ! this.moving){
 	    context.drawImage(this.image, 420 - this.widthS, 0, this.widthS, this.heightS, this.position.x, this.position.y,this.width,this.height);
 	}	
     }

@@ -4,8 +4,8 @@ class Enemy {
 	this.listeEn = new Array();
     }
 
-    addGoomba(x){
-	this.listeEn.push(new Goomba(x, 19));
+    addGoomba(x, delta, direction){
+	this.listeEn.push(new Goomba(x, delta, direction));
     }
 
     display(context, b, c){
@@ -14,9 +14,9 @@ class Enemy {
 	}
     }
 
-    update(map, b,dT){
+    update(map, b){
 	for(var i = 0; i < this.listeEn.length; i++){
-	    this.listeEn[i].update(dT);
+	    this.listeEn[i].update();
 	    this.listeEn[i].collision(map, b);
 	}
     }

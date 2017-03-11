@@ -3,7 +3,7 @@ const heightMap = 640;
 
 class MovingEntity extends Entity{
 
-    constructor(x, y, w, h, url, mass){
+    constructor(x, y, w, h, url, mass, delta, direction){
 	super(w, h, url, true);
 	this.mass = mass;
 	
@@ -17,19 +17,18 @@ class MovingEntity extends Entity{
 	this.accel = new Vecteur(0, 0);
 
 	// 0 = gauche et 1 = droite
-	this.direction = 1;
-	this.moving = false;
+	this.direction = direction;
+	this.delta = delta;
+	this.dT = 0;
     }
 
     moveRight(){
-	this.direction = 1;
 	this.vitesse.x += 1;
 	this.frame++;
 	this.frame = this.frame%7;
     }
 
     moveLeft(){
-	this.direction = 0;
 	this.vitesse.x -= 1;
 	this.frame++;
 	this.frame = this.frame%7;
@@ -40,18 +39,19 @@ class MovingEntity extends Entity{
 	var f = Vecteur.div(force, this.mass);
 	this.accel.add(f);
     }
-
-    update(dT){
+    
+    update(){
 	//update les vecteurs du joueur
 	this.posPrec.x = this.position.x;
 	this.posPrec.y = this.position.y;
-	if(dT < 315){
-	    console.log(this.frame);
-	    this.moveLeft();
-	}else if(dT >= 315){
-	    console.log(this.frame);
-	    this.moveRight();
+	this.dT++;
+	if(this.dT >= this.delta){
+	    this.direction = (! this.direction);
+	    this.dT = 0;
 	}
+	if(this.direction){
+	    this.moveRight();
+	} else this.moveLeft();
 	this.physic(this.gravity);
 	this.vitesse.add(this.accel);
 	this.position.add(this.vitesse);

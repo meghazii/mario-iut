@@ -5,6 +5,7 @@ class Player extends MovingEntity{
 
 	this.widthS = 60;
 	this.heightS = 95;
+	
 	this.jumping = false;
 	//this.boxCase = Math.trunc(this.position.x/32);
     }
@@ -15,7 +16,7 @@ class Player extends MovingEntity{
 
     moveRight(){
 	this.moving = true;
-	if(this.jumping) this.accel.x += 5;
+	if(this.jumping) this.accel.x += 3;
 	else this.accel.x += 10;
 	this.frameD++;
 	this.direction = 1;
@@ -24,9 +25,43 @@ class Player extends MovingEntity{
     moveLeft(){
 	this.moving = true;
 	this.direction = 0;
-	if(this.jumping) this.accel.x -= 5;
+	if(this.jumping) this.accel.x -= 2;
 	else this.accel.x -= 10;
 	this.frameG--;
+    }
+    
+    collision(map, b){
+	//Check les collisions avec les bords
+	if (this.position.x > widthMap - this.width) {
+	    this.position.x = widthMap - this.width;
+	    this.vitesse.x = 0;
+	} else if (this.position.x < 0) {
+	    this.vitesse.x = 0;
+	    this.position.x = 0;
+	}
+	else if (this.position.y <= 0) {
+	    this.vitesse.y = 0;
+	    this.position.y = 0;
+	}
+	//Teste les collisions avec les objets de la map
+	if(map.tiles[Math.trunc((this.position.x + 32)/32) + b][Math.trunc(this.position.y/32) + 1].collide){
+	    this.vitesse.x = 0;
+	    this.position.x = this.posPrec.x;
+	}
+	if(map.tiles[Math.trunc(this.position.x/32) + b][Math.trunc(this.position.y/32) + 1].collide){
+	    this.vitesse.x = 0;
+	    this.position.x = this.posPrec.x;
+	}
+	
+	if((map.tiles[Math.trunc((this.position.x)/32) + b][Math.trunc((this.position.y + 50)/32)].collide) ||
+	   (map.tiles[Math.trunc((this.position.x+32)/32) + b][Math.trunc((this.position.y+50)/32)].collide)){
+	    this.vitesse.y = 0;
+	    this.accel.y = 0;
+	    this.position.y = this.posPrec.y;
+	    this.jumping = false;
+	}else{
+	    this.jumping = true;
+	}
     }
     
     display(context){

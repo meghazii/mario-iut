@@ -1,5 +1,5 @@
 const widthMap = 800;
-const heightMap = 600;
+const heightMap = 640;
 
 class MovingEntity extends Entity{
 
@@ -23,6 +23,18 @@ class MovingEntity extends Entity{
 	this.moving = false;
     }
 
+    moveRight(){
+	this.accel.x += 3;
+	this.frame++;
+	this.direction = 1;
+    }
+
+    moveLeft(){
+	this.direction = 0;
+	this.accel.x -= 3;
+	this.frame--;
+    }
+
     physic(force){
 	//applique la gravité
 	var f = Vecteur.div(force, this.mass);
@@ -37,9 +49,12 @@ class MovingEntity extends Entity{
 	this.vitesse.add(this.accel);
 	this.position.add(this.vitesse);
 	this.vitesse.mult(0);
+	if(! this.jumping){
+	    this.accel.x *= 0.4;
+	}
     }
 
-    collision(map){
+    collision(map, b){
 	//Check les collisions avec les bords
 	if (this.position.x > widthMap - this.width) {
 	    this.position.x = widthMap - this.width;
@@ -47,20 +62,13 @@ class MovingEntity extends Entity{
 	} else if (this.position.x < 0) {
 	    this.vitesse.x = 0;
 	    this.position.x = 0;
-	}
-	if (this.position.y > heightMap - 50) {
-	    this.position.y = 640-32-50;
+	}else if(this.position.y > heightMap - this.height){
 	    this.vitesse.y = 0;
-	}
-	else if (this.position.y <= 0) {
+	    this.position.y = heightMap - this.height - 32;
+	}else if (this.position.y <= 0) {
 	    this.vitesse.y = 0;
 	    this.position.y = 0;
 	}
-	//Teste les collisions avec les objets de la map
-	/*if(map.tiles[20][map.heightMapA - (Math.trunc((this.position.y + 50)/32))].collide){
-	    this.vitesse.y = 0;
-	    this.position.y = this.posPrec.y;
-	}*/
     }
 }
 

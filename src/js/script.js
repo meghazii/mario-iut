@@ -1,5 +1,4 @@
 const timer = 16;
-var deltaT = 0;
 var b = 0;
 var c = 25;
 
@@ -7,12 +6,14 @@ window.onload = function() {
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
     var joueur = new Player(160, 640-32-50, 32, 50, 1);
+    var ennemi = new Enemy();
+    ennemi.addGoomba(0,0);
     var map = new Map();
     var interval = setInterval(
 	function(){
 	    ctx.clearRect(0, 0, 800,640);
 	    joueur.update();
-	    joueur.collision(map);
+	    joueur.collision(map, b);
 	    if((joueur.position.x >= 300) && (c < 115)){
 		joueur.position.x = joueur.posPrec.x;
 		b++;
@@ -31,18 +32,14 @@ window.onload = function() {
 		c = 120;
 		b = 95;
 	    }
-	    console.log();
 	    for(i = b; i < c; i++){
 		for(j = 0; j < 20; j++){
 		    map.tiles[i][j].display(ctx, (i-b)*32, j*32);
 		}
 	    }
+	    ennemi.update(map, b);
+	    ennemi.display(ctx);
 	    joueur.display(ctx);
-	    if(deltaT != 0) deltaT--;
-	    if(deltaT <= 0){
-		joueur.accel.mult(0);
-		joueur.jumping = false;
-	    }
 	}, timer);
 
     window.onkeypress = function(event){
@@ -56,8 +53,6 @@ window.onload = function() {
 	}
 	if(key == 38){
 	    if(! joueur.jumping){
-		joueur.jumping = true
-		deltaT = 35;
 		joueur.moveUp();
 	    }
 	}

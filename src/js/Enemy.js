@@ -14,9 +14,9 @@ class Enemy {
 	}
     }
 
-    update(map, b){
+    update(map, b,dT){
 	for(var i = 0; i < this.listeEn.length; i++){
-	    this.listeEn[i].update();
+	    this.listeEn[i].update(dT);
 	    this.listeEn[i].collision(map, b);
 	}
     }

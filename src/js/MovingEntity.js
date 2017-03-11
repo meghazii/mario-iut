@@ -8,8 +8,6 @@ class MovingEntity extends Entity{
 	this.mass = mass;
 	
 	//initialisation des frames de debut pour chacun des déplacements (droite et gauche)
-	this.frameD = 0;
-	this.frameG = 6;
 
 	this.posPrec = new Vecteur(x, y);
 	this.gravity = new Vecteur(0, 0.9*this.mass);
@@ -24,15 +22,17 @@ class MovingEntity extends Entity{
     }
 
     moveRight(){
-	this.accel.x += 3;
-	this.frame++;
 	this.direction = 1;
+	this.vitesse.x += 1;
+	this.frame++;
+	this.frame = this.frame%7;
     }
 
     moveLeft(){
 	this.direction = 0;
-	this.accel.x -= 3;
-	this.frame--;
+	this.vitesse.x -= 1;
+	this.frame++;
+	this.frame = this.frame%7;
     }
 
     physic(force){
@@ -41,17 +41,21 @@ class MovingEntity extends Entity{
 	this.accel.add(f);
     }
 
-    update(){
+    update(dT){
 	//update les vecteurs du joueur
 	this.posPrec.x = this.position.x;
 	this.posPrec.y = this.position.y;
+	if(dT < 315){
+	    console.log(this.frame);
+	    this.moveLeft();
+	}else if(dT >= 315){
+	    console.log(this.frame);
+	    this.moveRight();
+	}
 	this.physic(this.gravity);
 	this.vitesse.add(this.accel);
 	this.position.add(this.vitesse);
 	this.vitesse.mult(0);
-	if(! this.jumping){
-	    this.accel.x *= 0.4;
-	}
     }
 
     collision(map, b){

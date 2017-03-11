@@ -5,7 +5,10 @@ class Player extends MovingEntity{
 
 	this.widthS = 60;
 	this.heightS = 95;
-	
+
+	this.frameD = 0;
+	this.frameG = 6;
+
 	this.jumping = false;
 	//this.boxCase = Math.trunc(this.position.x/32);
     }
@@ -25,9 +28,22 @@ class Player extends MovingEntity{
     moveLeft(){
 	this.moving = true;
 	this.direction = 0;
-	if(this.jumping) this.accel.x -= 2;
+	if(this.jumping) this.accel.x -= 3;
 	else this.accel.x -= 10;
 	this.frameG--;
+    }
+    
+    update(){
+	//update les vecteurs du joueur
+	this.posPrec.x = this.position.x;
+	this.posPrec.y = this.position.y;
+	this.physic(this.gravity);
+	this.vitesse.add(this.accel);
+	this.position.add(this.vitesse);
+	this.vitesse.mult(0);
+	if(! this.jumping){
+	    this.accel.x *= 0.2;
+	}
     }
     
     collision(map, b){

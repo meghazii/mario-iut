@@ -1,6 +1,7 @@
 const timer = 16;
 var b = 0;
 var c = 25;
+var dT = 0;
 
 window.onload = function() {
     var canvas = document.getElementById('canvas');
@@ -37,9 +38,11 @@ window.onload = function() {
 		    map.tiles[i][j].display(ctx, (i-b)*32, j*32);
 		}
 	    }
-	    ennemi.update(map, b);
+	    ennemi.update(map, b, dT);
 	    ennemi.display(ctx, b, c);
 	    joueur.display(ctx);
+	    dT++;
+	    dT = dT%630;
 	}, timer);
 
     window.onkeypress = function(event){

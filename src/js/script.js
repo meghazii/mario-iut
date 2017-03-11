@@ -2,7 +2,7 @@ const timer = 16;
 var b = 0;
 var c = 25;
 var dT = 0;
-const widthMapCase = 120;
+const widthMapCase = 200;
 
 window.onload = function() {
     var canvas = document.getElementById('canvas');

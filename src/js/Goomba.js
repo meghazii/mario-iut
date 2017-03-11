@@ -6,10 +6,14 @@ class Goomba extends MovingEntity{
 	this.frame = 0;
 	this.widthS = 32;
 	this.heightS = 32;
+	this.dead = false;
     }
 
     display(context, b, c){
-	if(this.x >= b && this.x < c){ 
+	if(this.x >= b && this.x < c){
+	    if(this.dead){
+		context.drawImage(this.image, 32, 9*32, this.widthS, this.heightS, this.position.x - b*32, this.position.y, this.width, this.height);
+	    }
 	    if(this.direction == 1){
 		context.drawImage(this.image, 32, this.frame*32, this.widthS, this.heightS, this.position.x - b*32, this.position.y, this.width, this.height);
 	    }

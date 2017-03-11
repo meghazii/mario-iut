@@ -98,6 +98,12 @@ class Player{
 	    this.jumping = true;
 	}
     }
+
+    testKill(ennemi){
+	if((map.tiles[Math.trunc((this.position.x)/32) + b][Math.trunc((this.position.y + 50)/32)].collide) ||
+	   (map.tiles[Math.trunc((this.position.x+32)/32) + b][Math.trunc((this.position.y+50)/32)].collide)){
+	}
+    }
     
     display(context){
 	if(! this.direction && this.jumping){

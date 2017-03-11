@@ -24,6 +24,7 @@ class Map{
 	}
 	this.tiles[1][19] = new Entity(32,32,"./data/img/terre.png", true);
 	this.tiles[100][18] = new Entity(32,32,"./data/img/escalier.png", true);
+
     }
 }
 

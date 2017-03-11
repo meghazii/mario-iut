@@ -78,6 +78,7 @@ class Player{
 	    this.vitesse.y = 0;
 	    this.position.y = 0;
 	}
+	//alert(this.position.y);
 	//Teste les collisions avec les objets de la map
 	if(map.tiles[Math.trunc((this.position.x + 32)/32) + b][Math.trunc(this.position.y/32) + 1].collide){
 	    this.vitesse.x = 0;
@@ -89,7 +90,7 @@ class Player{
 	}
 	
 	if((map.tiles[Math.trunc((this.position.x)/32) + b][Math.trunc((this.position.y + 50)/32)].collide) ||
-	   (map.tiles[Math.trunc((this.position.x+32)/32) + b][Math.trunc((this.position.y+50)/32)].collide)){
+	   (map.tiles[Math.trunc((this.position.x+32)/32) + b][Math.trunc((this.position.y + 50)/32)].collide)){
 	    this.vitesse.y = 0;
 	    this.accel.y = 0;
 	    this.position.y = this.posPrec.y;
@@ -101,7 +102,7 @@ class Player{
 
     testKill(enemy){
 	for(var i = 0; i < enemy.listeEn.length; i++){
-	    if((Math.trunc(this.position.x/32)) == Math.trunc(enemy.listeEn[i].position.x/32)){
+	    if((Math.trunc(this.position.x/32)) == enemy.listeEn[i].position.x ){
 		enemy.listeEn[i].dead = true;
 	    }
 	}

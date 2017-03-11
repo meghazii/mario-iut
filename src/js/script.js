@@ -2,12 +2,12 @@ const timer = 16;
 var b = 0;
 var c = 25;
 var dT = 0;
-const widthMapCase = 200;
+const widthMapCase = 120;
 
 window.onload = function() {
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
-    var joueur = new Player(160, 558, 32, 50, 1, true);
+    var joueur = new Player(0, 0, 32, 50, 1, true);
     var ennemi = new Enemy();
     ennemi.addGoomba(20, 2*63, true);
     ennemi.addGoomba(22, 3*63, false);

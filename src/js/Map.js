@@ -19,9 +19,7 @@ class Map{
 		}
 	    }
 	}
-	
-	this.tiles[0][this.heightMapA -1] = new Entity(32,32,"./data/img/escalier.png", true);
-	
+	//this.tiles[0][this.heightMapA -1] = new Entity(32,32,"./data/img/escalier.png", true);
     }
 }
 

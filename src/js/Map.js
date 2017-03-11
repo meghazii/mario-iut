@@ -22,10 +22,12 @@ class Map{
 	for(i = 0;i < 500;i++){
 	    this.tiles[i][this.heightMapA - 1] = new Entity(32,32,"./data/img/terre.png", true);
 	}
+
 	for(i = 0; i > 4; i++){
 
 	}
 	this.tiles[110][18] = new Entity(32,32,"./data/img/escalier.png", true);
+
     }
 }
 

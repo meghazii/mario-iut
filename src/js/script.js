@@ -7,7 +7,7 @@ window.onload = function() {
     var ctx = canvas.getContext('2d');
     var joueur = new Player(160, 640-32-50, 32, 50, 1);
     var ennemi = new Enemy();
-    ennemi.addGoomba(0,0);
+    ennemi.addGoomba(20);
     var map = new Map();
     var interval = setInterval(
 	function(){
@@ -38,7 +38,7 @@ window.onload = function() {
 		}
 	    }
 	    ennemi.update(map, b);
-	    ennemi.display(ctx);
+	    ennemi.display(ctx, b, c);
 	    joueur.display(ctx);
 	}, timer);
 

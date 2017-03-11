@@ -4,13 +4,13 @@ class Enemy {
 	this.listeEn = new Array();
     }
 
-    addGoomba(x, y){
-	this.listeEn.push(new Goomba(x, y));
+    addGoomba(x){
+	this.listeEn.push(new Goomba(x, 19));
     }
 
-    display(context){
+    display(context, b, c){
 	for(var i = 0; i < this.listeEn.length; i++){
-	    this.listeEn[i].display(context);
+	    this.listeEn[i].display(context, b, c);
 	}
     }
 

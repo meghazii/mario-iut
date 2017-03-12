@@ -33,7 +33,7 @@ class Player{
     moveRight(){
 	this.moving = true;
 	if(this.jumping) this.accel.x += 3;
-	else this.accel.x += 10;
+	else this.accel.x += 5;
 	this.frameD++;
 	this.direction = true;
     }
@@ -42,7 +42,7 @@ class Player{
 	this.moving = true;
 	this.direction = false;
 	if(this.jumping) this.accel.x -= 3;
-	else this.accel.x -= 10;
+	else this.accel.x -= 5;
 	this.frameG--;
     }
 
@@ -80,9 +80,9 @@ class Player{
 	}
 	//!SECURITE, A RETIRER/!/!/!/!/!/!/!/!/!/
 	if(this.position.y >= heightMap){
-	    alert("GAME OVER");
 	    this.position.x = 0;
 	    this.position.y = 640-50-32;
+	    alert("GAME OVER");
 	}
 	//Teste les collisions avec les objets de la map
 	else if(map.tiles[Math.trunc((this.position.x + 32)/32) + b][Math.trunc(this.position.y/32) + 1].collide){

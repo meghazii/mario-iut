@@ -32,10 +32,14 @@ window.onload = function() {
 		    map.tiles[i][j].display(ctx, (i-b)*32, j*32);
 		}
 	    }
-	    console.log(ennemi.listeEn[0].position.x);
 	    box.display(ctx);
 	    ennemi.update(map, b);
-	    joueur.testKill(ennemi);
+	    joueur.testEnemy(ennemi);
+	    if(joueur.vie <= 0){
+		alert("GAME OVER");
+		joueur.position.x = 0;
+		joueur.vie = 1;
+	    }
 	    ennemi.display(ctx, b, c);
 	    joueur.display(ctx);
 	    dT++;

@@ -24,6 +24,7 @@ class Player{
 	this.direction = direction;
 	this.jumping = false;
 	this.moving = false;
+	this.vie = 1;
     }
     
     moveUp(){
@@ -78,7 +79,6 @@ class Player{
 	    this.vitesse.y = 0;
 	    this.position.y = 0;
 	}
-	//!SECURITE, A RETIRER/!/!/!/!/!/!/!/!/!/
 	if(this.position.y >= heightMap){
 	    this.position.x = 0;
 	    this.position.y = 640-50-32;
@@ -110,10 +110,15 @@ class Player{
 	}
     }
 
-    testKill(enemy){
+    testEnemy(enemy){
 	for(var i = 0; i < enemy.listeEn.length; i++){
-	    if((Math.trunc(this.position.x/32)) == enemy.listeEn[i].position.x){
+	    if((Math.trunc(this.position.x/32) + b <= Math.trunc((enemy.listeEn[i].position.x+32)/32)+b && Math.trunc((this.position.x+32)/32)+b >= Math.trunc(enemy.listeEn[i].position.x/32)+b) &&
+	       (Math.trunc(this.position.y/32) == Math.trunc(enemy.listeEn[i].position.y/32) -1)){
 		enemy.listeEn[i].dead = true;
+		this.moveUp();
+	    }
+	    else if(Math.trunc(this.position.x/32) + b <= Math.trunc((enemy.listeEn[i].position.x+32)/32)+b && Math.trunc((this.position.x+32)/32)+b >= Math.trunc(enemy.listeEn[i].position.x/32)+b){
+		this.vie--;
 	    }
 	}
     }

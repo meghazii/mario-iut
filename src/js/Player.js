@@ -79,33 +79,40 @@ class Player{
 	    this.position.y = 0;
 	}
 	//!SECURITE, A RETIRER/!/!/!/!/!/!/!/!/!/
-	if(this.position.y >= heightMap - 32 -50){
+	if(this.position.y >= heightMap){
+	    alert("GAME OVER");
+	    this.position.x = 0;
 	    this.position.y = 640-50-32;
 	}
 	//Teste les collisions avec les objets de la map
-	/*else if(map.tiles[Math.trunc((this.position.x + 32)/32) + b][Math.trunc(this.position.y/32) + 1].collide){
+	else if(map.tiles[Math.trunc((this.position.x + 32)/32) + b][Math.trunc(this.position.y/32) + 1].collide){
 	    this.vitesse.x = 0;
 	    this.position.x = this.posPrec.x;
+	}
+	else if(map.tiles[Math.trunc((this.position.x + 32)/32) + b][Math.trunc(this.position.y/32)].collide){
+	    this.vitesse.y = 0;
+	    this.position.y = this.posPrec.y;
 	}
 	if(map.tiles[Math.trunc(this.position.x/32) + b][Math.trunc(this.position.y/32) + 1].collide){
 	    this.vitesse.x = 0;
 	    this.position.x = this.posPrec.x;
 	}
-	
+	if(map.tiles[Math.trunc(this.position.x/32) + b][Math.trunc(this.position.y/32)].collide){
+	    this.position.y = this.posPrec.y;
+	    this.vitesse.y = 0;
+	}
 	if((map.tiles[Math.trunc((this.position.x)/32) + b][Math.trunc((this.position.y + 50)/32)].collide) ||
 	   (map.tiles[Math.trunc((this.position.x+32)/32) + b][Math.trunc((this.position.y + 50)/32)].collide)){
 	    this.vitesse.y = 0;
 	    this.accel.y = 0;
 	    this.position.y = this.posPrec.y;
 	    this.jumping = false;
-	}else{
-	    this.jumping = true;
-	}*/
+	}
     }
 
     testKill(enemy){
 	for(var i = 0; i < enemy.listeEn.length; i++){
-	    if((Math.trunc(this.position.x/32)) == enemy.listeEn[i].position.x ){
+	    if((Math.trunc(this.position.x/32)) == enemy.listeEn[i].position.x){
 		enemy.listeEn[i].dead = true;
 	    }
 	}

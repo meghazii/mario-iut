@@ -17,23 +17,15 @@ window.onload = function() {
 	    ctx.clearRect(0, 0, 800,640);
 	    joueur.update();
 	    joueur.collision(map, b);
-	    if((joueur.position.x >= 300) && (c < widthMapCase - 5)){
-		joueur.position.x = joueur.posPrec.x;
-		b++;
-		c++;
+	    if(joueur.position.x >= 768){
+		joueur.position.x = 0;
+		b += 25;
+		c += 25;
 	    }
-	    if((joueur.position.x < 100) && b > 5){
-		joueur.position.x = joueur.posPrec.x;
-		b--;
-		c--;
-	    }
-	    if(b < 0){
-		b = 0;
-		c = widthMapCase+25;
-	    }
-	    if(c > widthMapCase){
-		c = widthMapCase;
-		b = widthMapCase - 25;
+	    else if((joueur.position.x <= 0) && (b > 0)){
+		joueur.position.x = 768;
+		b -= 25;
+		c -= 25;
 	    }
 	    for(i = b; i < c; i++){
 		for(j = 0; j < 20; j++){
@@ -59,6 +51,7 @@ window.onload = function() {
 	}
 	if(key == 38){
 	    if(! joueur.jumping){
+		joueur.jumping = true;
 		joueur.moveUp();
 	    }
 	}

@@ -78,9 +78,12 @@ class Player{
 	    this.vitesse.y = 0;
 	    this.position.y = 0;
 	}
-	//alert(this.position.y);
+	//!SECURITE, A RETIRER/!/!/!/!/!/!/!/!/!/
+	if(this.position.y >= heightMap - 32 -50){
+	    this.position.y = 640-50-32;
+	}
 	//Teste les collisions avec les objets de la map
-	if(map.tiles[Math.trunc((this.position.x + 32)/32) + b][Math.trunc(this.position.y/32) + 1].collide){
+	/*else if(map.tiles[Math.trunc((this.position.x + 32)/32) + b][Math.trunc(this.position.y/32) + 1].collide){
 	    this.vitesse.x = 0;
 	    this.position.x = this.posPrec.x;
 	}
@@ -97,7 +100,7 @@ class Player{
 	    this.jumping = false;
 	}else{
 	    this.jumping = true;
-	}
+	}*/
     }
 
     testKill(enemy){

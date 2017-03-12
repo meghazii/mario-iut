@@ -9,7 +9,12 @@ window.onload = function() {
     var ctx = canvas.getContext('2d');
     var joueur = new Player(0, 0, 32, 1, true);
     var ennemi = new Enemy();
-    ennemi.addGoomba(23, 3*63, true);
+    ennemi.addGoomba(22, 3*63, true);
+    ennemi.addGoomba(34, 3*63, true);
+    ennemi.addGoomba(40, 2*63, false);
+    ennemi.addGoomba(55, 2*63, true);
+    ennemi.addGoomba(85, 2*63, true);
+    ennemi.addGoomba(110, 2*63, false);
     var box = new Box(0, 0);
     var map = new Map();
     var interval = setInterval(
@@ -34,7 +39,7 @@ window.onload = function() {
 	    }
 	    box.display(ctx);
 	    ennemi.update(map, b);
-	    joueur.testEnemy(ennemi);
+	    joueur.testEnemy(ennemi, b, c);
 	    joueur.loose();
 	    ennemi.display(ctx, b, c);
 	    joueur.display(ctx);

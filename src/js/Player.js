@@ -1,6 +1,6 @@
 class Player{
     
-    constructor(x, y, w,h,  mass, direction){
+    constructor(x, y, w, mass, direction){
 
 	this.image = new Image();
 	this.image.src = "./data/img/mario.png";
@@ -16,7 +16,7 @@ class Player{
 	this.widthS = 60;
 	this.heightS = 95;
 	this.width = w;
-	this.height = h;
+	this.height = 50;
 
 	this.frameD = 0;
 	this.frameG = 6;
@@ -24,7 +24,8 @@ class Player{
 	this.direction = direction;
 	this.jumping = false;
 	this.moving = false;
-	this.vie = 2;
+	this.vie = 1;
+	this.degat = false;
     }
     
     moveUp(){
@@ -47,13 +48,6 @@ class Player{
 	this.frameG--;
     }
 
-    takeDmg(){
-	this.moving = true;
-	this.jumping = true;
-	this.accel.x -= 5;
-	this.accel.y -= 10;
-    }
-
     physic(force){
 	//applique la gravité
 	var f = Vecteur.div(force, this.mass);
@@ -64,6 +58,10 @@ class Player{
 	//update les vecteurs du joueur
 	this.posPrec.x = this.position.x;
 	this.posPrec.y = this.position.y;
+	if(this.degat && this.vie == 1){
+	    this.degat = false;
+	    this.height = 32;
+	}
 	this.physic(this.gravity);
 	this.vitesse.add(this.accel);
 	this.position.add(this.vitesse);
@@ -75,9 +73,9 @@ class Player{
     
     collision(map, b){
 	//Check les collisions avec les bords
-	if (this.position.x > widthMap - this.width) {
-	    this.position.x = widthMap - this.width;
-	    this.vitesse.x = 0;
+	if (this.position.x > widthMap) {
+	    alert("YOU WON");
+	    location.reload();
 	} else if (this.position.x < 0) {
 	    this.vitesse.x = 0;
 	    this.position.x = 0;
@@ -87,8 +85,8 @@ class Player{
 	    this.position.y = 0;
 	}
 	if(this.position.y >= heightMap){
-	    this.vie--;
-	    this.loose();
+	    alert("GAME OVER");
+	    location.reload(false);
 	}
 	//Teste les collisions avec les objets de la map
 	else if(map.tiles[Math.trunc((this.position.x + 32)/32) + b][Math.trunc(this.position.y/32) + 1].collide){
@@ -107,8 +105,8 @@ class Player{
 	    this.position.y = this.posPrec.y;
 	    this.vitesse.y = 0;
 	}
-	if((map.tiles[Math.trunc((this.position.x)/32) + b][Math.trunc((this.position.y + 50)/32)].collide) ||
-	   (map.tiles[Math.trunc((this.position.x+32)/32) + b][Math.trunc((this.position.y + 50)/32)].collide)){
+	if((map.tiles[Math.trunc((this.position.x)/32) + b][Math.trunc((this.position.y + this.height)/32)].collide) ||
+	   (map.tiles[Math.trunc((this.position.x+32)/32) + b][Math.trunc((this.position.y + this.height)/32)].collide)){
 	    this.vitesse.y = 0;
 	    this.accel.y = 0;
 	    this.position.y = this.posPrec.y;
@@ -117,29 +115,23 @@ class Player{
     }
 
     loose(){
-	if(this.vie <=0){
+	if(this.vie <= 0){
 	    alert("GAME OVER");
 	    location.reload(false);
 	}
-	else if(this.vie >= 2){
-	    this.height = 50;
-	}
-	else if(this.vie == 1){
-	    this.height = 32;
-	    this.position.x -= 18;
-	}
     }
 
-    testEnemy(enemy){
+    testEnemy(enemy, b, c){
 	for(var i = 0; i < enemy.listeEn.length; i++){
-	    if((Math.trunc(this.position.x/32)+b == Math.trunc(enemy.listeEn[i].position.x/32)+b) && (Math.trunc(this.position.y/32) == Math.trunc(enemy.listeEn[i].position.y/32)-2)){
-		if(! enemy.listeEn[i].dead) this.moveUp();
-		enemy.listeEn[i].dead = true;	
-	    }
-	    else if((Math.trunc(this.position.x/32)+b == Math.trunc(enemy.listeEn[i].position.x/32)+b) && (Math.trunc(this.position.y/32) == Math.trunc(enemy.listeEn[i].position.y/32)-1) &&
-		    ( ! enemy.listeEn[i].dead)){
-		this.vie--;
-		this.takeDmg();
+	    if(enemy.listeEn[i].x >= b && enemy.listeEn[i].x < c){
+		if((Math.trunc(this.position.x/32)+b == Math.trunc(enemy.listeEn[i].position.x/32)+b) && (Math.trunc(this.position.y/32) == Math.trunc(enemy.listeEn[i].position.y/32)-2)){
+		    if(! enemy.listeEn[i].dead) this.moveUp();
+		    enemy.listeEn[i].dead = true;	
+		}
+		else if((Math.trunc(this.position.x/32)+b == Math.trunc(enemy.listeEn[i].position.x/32)+b) && (Math.trunc(this.position.y/32) == Math.trunc(enemy.listeEn[i].position.y/32)-1) &&
+			( ! enemy.listeEn[i].dead)){
+		    this.vie--;
+		}
 	    }
 	}
     }

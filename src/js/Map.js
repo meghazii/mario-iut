@@ -20,13 +20,13 @@ class Map{
 	    }
 	}
 	for(i = 0;i < this.widthMapA;i++){
-		/*
+		
 		if(i == 31 || i == 32 || i <47 && i > 43 || i > 60 && i < 69 || i >= 93 && i <= 96 || i >= 113 && i <= 115){ // trou de la map
 			this.tiles[i][this.heightMapA - 1] = new Entity(32,32,"./data/img/ciel.png", false);
 		}
-		else{ */
+		else{ 
 	    	this.tiles[i][this.heightMapA - 1] = new Entity(32,32,"./data/img/terre.png", true);
-		//}
+		}
 	}
 
 	for(i = 0;i < 6;i++){

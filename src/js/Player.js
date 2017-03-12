@@ -126,6 +126,7 @@ class Player{
 	}
 	else if(this.vie == 1){
 	    this.height = 32;
+	    this.position.x -= 18;
 	}
     }
 

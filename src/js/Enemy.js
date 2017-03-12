@@ -10,7 +10,9 @@ class Enemy {
 
     display(context, b, c){
 	for(var i = 0; i < this.listeEn.length; i++){
-	    this.listeEn[i].display(context, b, c);
+	    if(! this.listeEn[i].remove){
+		this.listeEn[i].display(context, b, c);
+	    }
 	}
     }
 

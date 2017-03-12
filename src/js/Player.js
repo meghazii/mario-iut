@@ -1,6 +1,6 @@
 class Player{
     
-    constructor(x, y, w, h, mass, direction){
+    constructor(x, y, w,h,  mass, direction){
 
 	this.image = new Image();
 	this.image.src = "./data/img/mario.png";
@@ -24,7 +24,7 @@ class Player{
 	this.direction = direction;
 	this.jumping = false;
 	this.moving = false;
-	this.vie = 1;
+	this.vie = 2;
     }
     
     moveUp(){
@@ -45,6 +45,13 @@ class Player{
 	if(this.jumping) this.accel.x -= 3;
 	else this.accel.x -= 5;
 	this.frameG--;
+    }
+
+    takeDmg(){
+	this.moving = true;
+	this.jumping = true;
+	this.accel.x -= 5;
+	this.accel.y -= 10;
     }
 
     physic(force){
@@ -80,9 +87,8 @@ class Player{
 	    this.position.y = 0;
 	}
 	if(this.position.y >= heightMap){
-	    this.position.x = 0;
-	    this.position.y = 640-50-32;
-	    alert("GAME OVER");
+	    this.vie--;
+	    this.loose();
 	}
 	//Teste les collisions avec les objets de la map
 	else if(map.tiles[Math.trunc((this.position.x + 32)/32) + b][Math.trunc(this.position.y/32) + 1].collide){
@@ -110,15 +116,29 @@ class Player{
 	}
     }
 
+    loose(){
+	if(this.vie <=0){
+	    alert("GAME OVER");
+	    location.reload(false);
+	}
+	else if(this.vie >= 2){
+	    this.height = 50;
+	}
+	else if(this.vie == 1){
+	    this.height = 32;
+	}
+    }
+
     testEnemy(enemy){
 	for(var i = 0; i < enemy.listeEn.length; i++){
-	    if((Math.trunc(this.position.x/32) + b <= Math.trunc((enemy.listeEn[i].position.x+32)/32)+b && Math.trunc((this.position.x+32)/32)+b >= Math.trunc(enemy.listeEn[i].position.x/32)+b) &&
-	       (Math.trunc(this.position.y/32) == Math.trunc(enemy.listeEn[i].position.y/32) -1)){
-		enemy.listeEn[i].dead = true;
-		this.moveUp();
+	    if((Math.trunc(this.position.x/32)+b == Math.trunc(enemy.listeEn[i].position.x/32)+b) && (Math.trunc(this.position.y/32) == Math.trunc(enemy.listeEn[i].position.y/32)-2)){
+		if(! enemy.listeEn[i].dead) this.moveUp();
+		enemy.listeEn[i].dead = true;	
 	    }
-	    else if(Math.trunc(this.position.x/32) + b <= Math.trunc((enemy.listeEn[i].position.x+32)/32)+b && Math.trunc((this.position.x+32)/32)+b >= Math.trunc(enemy.listeEn[i].position.x/32)+b){
+	    else if((Math.trunc(this.position.x/32)+b == Math.trunc(enemy.listeEn[i].position.x/32)+b) && (Math.trunc(this.position.y/32) == Math.trunc(enemy.listeEn[i].position.y/32)-1) &&
+		    ( ! enemy.listeEn[i].dead)){
 		this.vie--;
+		this.takeDmg();
 	    }
 	}
     }

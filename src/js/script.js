@@ -7,7 +7,7 @@ const widthMapCase = 200;
 window.onload = function() {
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
-    var joueur = new Player(0, 0, 32, 50, 1, true);
+    var joueur = new Player(0, 0, 32, 1, true);
     var ennemi = new Enemy();
     ennemi.addGoomba(23, 3*63, true);
     var box = new Box(0, 0);
@@ -35,11 +35,7 @@ window.onload = function() {
 	    box.display(ctx);
 	    ennemi.update(map, b);
 	    joueur.testEnemy(ennemi);
-	    if(joueur.vie <= 0){
-		alert("GAME OVER");
-		joueur.position.x = 0;
-		joueur.vie = 1;
-	    }
+	    joueur.loose();
 	    ennemi.display(ctx, b, c);
 	    joueur.display(ctx);
 	    dT++;

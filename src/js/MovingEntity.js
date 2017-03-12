@@ -20,6 +20,9 @@ class MovingEntity extends Entity{
 	this.direction = direction;
 	this.delta = delta;
 	this.dT = 0;
+	this.dead = false;
+	this.remove = false;
+	this.dDeath = 0;
     }
 
     moveRight(){
@@ -45,13 +48,21 @@ class MovingEntity extends Entity{
 	this.posPrec.x = this.position.x;
 	this.posPrec.y = this.position.y;
 	this.dT++;
-	if(this.dT >= this.delta){
+	if(this.dead && this.dDeath >= 30){
+	    this.remove = true;
+	}
+	else if(this.dead && this.dDeath < 30){
+	    this.dDeath++;
+	}
+	else if(this.dT >= this.delta){
 	    this.direction = (! this.direction);
 	    this.dT = 0;
 	}
-	if(this.direction){
+	if(this.direction && ! this.dead){
 	    this.moveRight();
-	} else this.moveLeft();
+	} else if(! this.direction && ! this.dead){
+	    this.moveLeft();
+	}
 	this.physic(this.gravity);
 	this.vitesse.add(this.accel);
 	this.position.add(this.vitesse);

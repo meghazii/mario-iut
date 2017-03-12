@@ -6,7 +6,6 @@ class Goomba extends MovingEntity{
 	this.frame = 0;
 	this.widthS = 32;
 	this.heightS = 32;
-	this.dead = false;
     }
 
     display(context, b, c){
@@ -19,7 +18,7 @@ class Goomba extends MovingEntity{
 	    }
 	    else if(! this.direction){
 		context.drawImage(this.image, 0, this.frame*32, this.widthS, this.heightS, this.position.x, this.position.y, this.width, this.height);
-	    }
+	    }   
 	}
     }
 }

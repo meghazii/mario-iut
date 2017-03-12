@@ -2,7 +2,7 @@ class Map{
 
     constructor(){
 
-	this.widthMapA = 175;
+	this.widthMapA = 150;
 	this.heightMapA = 20;
 	
 	this.tiles = new Array(this.widthMapA);
@@ -21,7 +21,7 @@ class Map{
 	}
 	for(i = 0;i < this.widthMapA;i++){
 		/*
-		if(i <47 && i > 43 || i > 60 && i < 69 || i >= 93 && i <= 96){ // trou de la map
+		if(i == 31 || i == 32 || i <47 && i > 43 || i > 60 && i < 69 || i >= 93 && i <= 96 || i >= 113 && i <= 115){ // trou de la map
 			this.tiles[i][this.heightMapA - 1] = new Entity(32,32,"./data/img/ciel.png", false);
 		}
 		else{ */
@@ -34,30 +34,38 @@ class Map{
 		 this.tiles[i+62][this.heightMapA -8] = new Entity(32,32,"./data/img/brique.png", true);
 	}
 	for(i = 0; i < 4;i++){
-		// this.tiles[i+12][this.heightMapA - 2] = new Entity(32,32,"./data/img/escalier.png", true);
-		// this.tiles[i+26][this.heightMapA - 2] = new Entity(32,32,"./data/img/escalier.png", true);
+		 this.tiles[i+12][this.heightMapA - 2] = new Entity(32,32,"./data/img/escalier.png", true);
 		 this.tiles[i+35][this.heightMapA - 6] = new Entity(32,32,"./data/img/brique.png", true);
 		 this.tiles[i+57][this.heightMapA - 6] = new Entity(32,32,"./data/img/brique.png", true); //mobs en dessous
 		 this.tiles[i+70][this.heightMapA - 6] = new Entity(32,32,"./data/img/brique.png", true); //mobs en dessous
+		 this.tiles[i+135][this.heightMapA - 2] = new Entity(32,32,"./data/img/escalier.png", true);
 	}
 	for(i = 0; i < 3;i++){
-		 //this.tiles[i+13][this.heightMapA - 3] = new Entity(32,32,"./data/img/escalier.png", true);
-		 //this.tiles[i+26][this.heightMapA - 3] = new Entity(32,32,"./data/img/escalier.png", true);
+		 this.tiles[i+13][this.heightMapA - 3] = new Entity(32,32,"./data/img/escalier.png", true);
 		 this.tiles[i+52][this.heightMapA - 4] = new Entity(32,32,"./data/img/brique.png", true); // mobs en dessous
 		 this.tiles[i+83][this.heightMapA - 6] = new Entity(32,32,"./data/img/brique.png", true);
+		 this.tiles[116][this.heightMapA - i - 2] = new Entity(32,32,"./data/img/escalier.png", true);
+		 this.tiles[i+108][this.heightMapA - 5] = new Entity(32,32,"./data/img/brique.png", true);
+		 this.tiles[i+136][this.heightMapA - 3] = new Entity(32,32,"./data/img/escalier.png", true);
 	}
 	for(i = 0; i < 2;i++){
 		 this.tiles[i+14][this.heightMapA - 4] = new Entity(32,32,"./data/img/escalier.png", true);
-		 this.tiles[i+26][this.heightMapA - 4] = new Entity(32,32,"./data/img/escalier.png", true);
+
 		 this.tiles[i+88][this.heightMapA - 6] = new Entity(32,32,"./data/img/brique.png", true);
+		 this.tiles[i+137][this.heightMapA - 4] = new Entity(32,32,"./data/img/escalier.png", true);
 	}
 	this.tiles[15][this.heightMapA - 5] = new Entity(32,32,"./data/img/escalier.png", true);
-	this.tiles[26][this.heightMapA - 5] = new Entity(32,32,"./data/img/escalier.png", true);
-	//this.tiles[43][this.heightMapA - 2] = new Entity(32,32,"./data/img/tuyau.png", true);
-	//this.tiles[47][this.heightMapA - 2] = new Entity(32,32,"./data/img/tuyau.png", true);
-	this.tiles[90][this.heightMapA - 2] = new Entity(32, 32,"./data/img/tuyau.png", true);
+	this.tiles[30][this.heightMapA - 2] = new Entity(32,32,"./data/img/tuyau.png", true);
+
+	this.tiles[33][this.heightMapA - 2] = new Entity(32,32,"./data/img/tuyau.png", true);
+	this.tiles[43][this.heightMapA - 2] = new Entity(32,32,"./data/img/tuyau.png", true);
+	this.tiles[47][this.heightMapA - 2] = new Entity(32,32,"./data/img/tuyau.png", true);
+	this.tiles[80][this.heightMapA - 2] = new Entity(32,32,"./data/img/tuyau.png", true);
 	this.tiles[92][this.heightMapA - 2] = new Entity(32,32,"./data/img/tuyau.png", true);
 	this.tiles[97][this.heightMapA - 2] = new Entity(32,32,"./data/img/tuyau.png", true);
+	this.tiles[105][this.heightMapA - 2] = new Entity(32,32,"./data/img/tuyau.png", true);
+	this.tiles[112][this.heightMapA - 2] = new Entity(32,32,"./data/img/tuyau.png", true);
+	this.tiles[138][this.heightMapA - 5] = new Entity(32,32,"./data/img/escalier.png", true);
     }
 }
 

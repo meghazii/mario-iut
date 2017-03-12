@@ -9,9 +9,7 @@ window.onload = function() {
     var ctx = canvas.getContext('2d');
     var joueur = new Player(0, 0, 32, 50, 1, true);
     var ennemi = new Enemy();
-    ennemi.addGoomba(45, 2*63, true);
-    ennemi.addGoomba(20, 2*63, true);
-    ennemi.addGoomba(22, 3*63, false);
+    ennemi.addGoomba(23, 3*63, true);
     var box = new Box(0, 0);
     var map = new Map();
     var interval = setInterval(

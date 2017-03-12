@@ -29,8 +29,8 @@ class Map{
 	}
 
 	for(i = 0;i < 6;i++){
-		 this.tiles[i+18][this.heightMapA -7] = new Entity(32,32,"./data/img/escalier.png", true);
-		 this.tiles[i+60][this.heightMapA -8] = new Entity(32,32,"./data/img/escalier.png", true);
+		 this.tiles[i+18][this.heightMapA -7] = new Entity(32,32,"./data/img/brique.png", true);
+		 this.tiles[i+60][this.heightMapA -8] = new Entity(32,32,"./data/img/brique.png", true);
 	}
 	for(i = 0; i < 4;i++){
 		// this.tiles[i+12][this.heightMapA - 2] = new Entity(32,32,"./data/img/escalier.png", true);

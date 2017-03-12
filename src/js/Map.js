@@ -55,8 +55,7 @@ class Map{
 	this.tiles[26][this.heightMapA - 5] = new Entity(32,32,"./data/img/escalier.png", true);
 	//this.tiles[43][this.heightMapA - 2] = new Entity(32,32,"./data/img/tuyau.png", true);
 	//this.tiles[47][this.heightMapA - 2] = new Entity(32,32,"./data/img/tuyau.png", true);
-	this.tiles[80][this.heightMapA - 2] = new Entity(32,32,"./data/img/tuyau.png", true);
-
+	this.tiles[90][this.heightMapA - 2] = new Entity(32, 32,"./data/img/tuyau.png", true);
 	this.tiles[92][this.heightMapA - 2] = new Entity(32,32,"./data/img/tuyau.png", true);
 	this.tiles[97][this.heightMapA - 2] = new Entity(32,32,"./data/img/tuyau.png", true);
     }

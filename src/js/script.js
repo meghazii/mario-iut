@@ -11,6 +11,7 @@ window.onload = function() {
     var ennemi = new Enemy();
     ennemi.addGoomba(20, 2*63, true);
     ennemi.addGoomba(22, 3*63, false);
+    var box = new Box(0, 0);
     var map = new Map();
     var interval = setInterval(
 	function(){
@@ -32,6 +33,7 @@ window.onload = function() {
 		    map.tiles[i][j].display(ctx, (i-b)*32, j*32);
 		}
 	    }
+	    box.display(ctx);
 	    ennemi.update(map, b);
 	    joueur.testKill(ennemi);
 	    ennemi.display(ctx, b, c);
